@@ -1,11 +1,6 @@
 #include<iostream>
 using namespace std;
-//test
-//update1
-//update2
-//update3
-//updateby hazrulidham
-//test branch
+//set to original
 
 
 int main()
