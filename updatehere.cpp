@@ -1,8 +1,6 @@
 #include<iostream>
 using namespace std;
-//set to original
-//test again
-//ready to submit main branch
+//testing commit&pull
 
 
 int main()
