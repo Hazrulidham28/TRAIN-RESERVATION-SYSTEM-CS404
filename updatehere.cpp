@@ -1,5 +1,7 @@
 #include<iostream>
 using namespace std;
+//test
+
 
 int main()
 {   //An array to store staff name and password used to login
