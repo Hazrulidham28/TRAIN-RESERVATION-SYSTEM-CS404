@@ -1,6 +1,7 @@
 #include<iostream>
 using namespace std;
 //testing commit&pull
+//updatting test
 
 
 int main()
