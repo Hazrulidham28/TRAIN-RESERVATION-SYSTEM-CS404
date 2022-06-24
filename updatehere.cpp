@@ -6,10 +6,25 @@ using namespace std;
 //test3
 
 
+//struct definition for Train Details
+
+struct Traininfo
+{
+    int TrainCode;
+    string OriginStation;
+    string DestinationStation;
+    float DepartureTime;
+    float EstTimeArrival;
+    float PricePerTicket;
+    char Class;
+};
+
 int main()
 {   //An array to store staff name and password used to login
     string staff[4]={"Idham","Alif","Hadi","Najmi"};
     int passStaff[4]={100,101,102,103};
+    //Array for Train Details
+    Traininfo TrainDetails[10];//link struct to array variable
     int menu1;
     //create output for main menu
     cout<<"--------------WELCOME-------------"<<endl;
@@ -55,7 +70,31 @@ int main()
                             
                             break;
                         case 2:
-                           // Addtrain();
+                            
+                            cout<<"-------ADD TRAIN SCHEDULE----------"<<endl;
+                            cout<<"-----------------------------------"<<endl<<endl;
+
+                            for(int i =0; i<10; i++){//ada 10 trains
+                            cout<<"Please enter TRAIN CODE involved: "; 
+                            cin>>TrainDetails[i].TrainCode;
+                            cout<<"Please enter the ORIGIN station: ";
+                            getline(cin>>ws, TrainDetails[i].OriginStation);
+                            cout<<"Please enter the DESTINATION station: ";
+                            getline(cin>>ws, TrainDetails[i].DestinationStation);
+
+                            //need some time to research libraries for TIME yg suitable
+                            cout<<"Please enter DEPARTURE time: ";
+                            cin>>TrainDetails[i].DepartureTime;
+                            cout<<"Pleas enter ESTIMATED ARRIVAL time: ";
+                            cin>>TrainDetails[i].EstTimeArrival;
+                            //-------------------------------------------------------
+
+                            cout<<"Please enter PRICE per ticket: ";
+                            cin>>TrainDetails[i].PricePerTicket;
+                            cout<<"Please enter CLASS ('B','P','G','S'): ";
+                            cin>>TrainDetails[i].Class;
+                            };
+
                             break;
                         case 3:
                            // Edittrain();
