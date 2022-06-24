@@ -19,7 +19,7 @@ int main()
     cout<<"Please enter your choice"<<endl;
     //create input
     cin>>menu1;
-        if(menu1 = 1){
+        if(menu1 == 1){
             string username;
             int pass1;
             bool authentication = false;
@@ -84,7 +84,7 @@ int main()
 
 
         }
-        else if(menu1 = 2){
+        else if(menu1 == 2){
             int menucust;
             //menu in customer
             cout<<"Welcome to train reservation system"<<endl;
