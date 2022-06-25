@@ -18,11 +18,20 @@ struct Traininfo
     float PricePerTicket;
     char Class;
 };
+//struct definition for Reservation Details
+struct ReserveDetails
+{
+    string Custname, CustEmail;
+    int CustIC, CustPhone, quantity;
+    char CustCategory;
+};
 
 int main()
 {   //An array to store staff name and password used to login
     string staff[4]={"Idham","Alif","Hadi","Najmi"};
     int passStaff[4]={100,101,102,103};
+    //Customer Details struct
+    CustomerDetails CustRec;
     //Array for Train Details
     Traininfo TrainDetails[10];//link struct to array variable
     int menu1;
@@ -136,6 +145,26 @@ int main()
                 {
                 case 1:
                     // Reserve();
+                    //journeyCode for customer enter to select the journey schedule
+                    int JorneyCode;
+                    float totalprice;
+                    //Display train schedule
+                    //Enter Reservation Details
+                    cout<<"Enter Jorney Code ";
+                    cin>>i;
+                    cout<<"Enter Name: "
+                    getline(cin,CustRec.CustName);
+                    cout<<"Enter Identity Card Number: ";
+                    cin>>CustRec.CustIC;
+                    cout<<"Enter Phone Number: ";
+                    cin>>CustRec.CustPhone;
+                    cout<<"Enter Email: ";
+                    getline(cin,CustRec.CustEmail);
+                    cout<<"Enter S for senior citizen"<<endl<<"Enter T for student"<<endl<<"Enter O for OKU"<<endl<<"Enter N for normal citizen";
+                    cin>>CustRec.CustCategory;
+                    cout<<"Enter Quantity: "
+                    cin>>CustRec.quantity;
+                    totalprice=getPrice(int quantity,char CustRec.CustCategory, float TrainDetails[i].PricePerTicket);
                     break;
                 case 2:
                     // enquiry();
@@ -152,3 +181,18 @@ int main()
 
     return 0;
 }
+
+//function to calculate total price
+ float getPrice(int total,char type,float price)
+ {
+     if (type == 'S' || type == 's')
+     totalprice=total * 0.50 * price;
+     else if (type == 'T' || type == 't')
+     totalprice=total * 0.30 * price;
+     if (type == 'O' || type == 'o')
+     totalprice=total * 0.50 * price;
+     if (type == 'N' || type == 'n')
+     totalprice=total * price;
+     
+     return totalprice;
+ }
