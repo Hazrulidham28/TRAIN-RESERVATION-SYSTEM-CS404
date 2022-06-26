@@ -1,4 +1,5 @@
 #include<iostream>
+#include<fstream>
 using namespace std;
 //testing commit&pull
 //updatting test
@@ -33,8 +34,10 @@ int main()
     int passStaff[4]={100,101,102,103};
     //Customer Details struct
     ReserveDetails CustRec;
-    //Array for Train Details
-    Traininfo TrainDetails[10];//link struct to array variable
+    //variable for adding train
+    int AddMoreTrainInput;
+    //link struct to a variable
+    Traininfo TrainDetails;
     int menu1;
     //create output for main menu
     cout<<"--------------WELCOME-------------"<<endl;
@@ -84,26 +87,32 @@ int main()
                             cout<<"-------ADD TRAIN SCHEDULE----------"<<endl;
                             cout<<"-----------------------------------"<<endl<<endl;
 
-                            for(int i =0; i<10; i++){//ada 10 trains
-                            cout<<"Please enter TRAIN CODE involved: "; 
-                            cin>>TrainDetails[i].TrainCode;
-                            cout<<"Please enter the ORIGIN station: ";
-                            getline(cin>>ws, TrainDetails[i].OriginStation);
-                            cout<<"Please enter the DESTINATION station: ";
-                            getline(cin>>ws, TrainDetails[i].DestinationStation);
+                            cout<<"Number of trains wanted to be add: "<<endl;
+                            cin>>AddMoreTrainInput;
 
-                            //need some time to research libraries for TIME yg suitable
-                            cout<<"Please enter DEPARTURE time: ";
-                            cin>>TrainDetails[i].DepartureTime;
-                            cout<<"Pleas enter ESTIMATED ARRIVAL time: ";
-                            cin>>TrainDetails[i].EstTimeArrival;
-                            //-------------------------------------------------------
+                                for(int i = 1; i<=AddMoreTrainInput; i++){
+                                //ask the staff to input the train details involved
+                                    cout<<"Please enter TRAIN CODE involved: "; 
+                                    cin>>TrainDetails.TrainCode;
+                                    cout<<"Please enter the ORIGIN station: ";
+                                    getline(cin>>ws, TrainDetails.OriginStation);
+                                    cout<<"Please enter the DESTINATION station: ";
+                                    getline(cin>>ws, TrainDetails.DestinationStation);
 
-                            cout<<"Please enter PRICE per ticket: ";
-                            cin>>TrainDetails[i].PricePerTicket;
-                            cout<<"Please enter CLASS ('B','P','G','S'): ";
-                            cin>>TrainDetails[i].Class;
-                            };
+                                //need some time to research libraries for TIME yg suitable
+                                     cout<<"Please enter DEPARTURE time: ";
+                                     cin>>TrainDetails.DepartureTime;
+                                     cout<<"Pleas enter ESTIMATED ARRIVAL time: ";
+                                     cin>>TrainDetails.EstTimeArrival;
+                                //-------------------------------------------------------
+
+                                    cout<<"Please enter PRICE per ticket: ";
+                                    cin>>TrainDetails.PricePerTicket;
+                                    cout<<"Please enter CLASS ('B','P','G','S'): ";
+                                    cin>>TrainDetails.Class;
+
+                                    AddTDToFile(TrainDetails);
+                                }
 
                             break;
                         case 3:
@@ -218,3 +227,26 @@ int main()
  	
  	
  }
+
+ //function to input all data inputted by staff to a file system
+ void AddTDToFile(Traininfo p){
+    fstream inputdetail;
+
+    inputdetail.open("TrainDetails.txt", ios::app);
+    if(inputdetail.fail()){
+        cout<<"input file does not exist"<<endl;
+        cout<<"Press any key to continue"<<endl;
+    }
+    else {
+    inputdetail<<endl;
+    inputdetail<<"Train Code: "<<p.TrainCode<<endl;
+    inputdetail<<"Origin Station: "<<p.OriginStation<<endl;
+    inputdetail<<"Destination Station: "<<p.DestinationStation<<endl;
+    inputdetail<<"Departure Time: "<<p.DepartureTime<<endl;
+    inputdetail<<"Estimate Time Arrival: "<<p.EstTimeArrival<<endl;
+    inputdetail<<"Price per Ticket: "<<p.PricePerTicket<<endl;
+    inputdetail<<"Train Class: "<<p.Class<<endl;
+        
+    }
+    inputdetail.close();
+}
