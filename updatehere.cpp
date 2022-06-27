@@ -8,9 +8,9 @@ using namespace std;
 //test3
 //Function prototype
  float getPrice(int ,char ,float );
+
  void RecReserve(int , string , int , int , string , char , int , float);
- void AddTDToFile(Traininfo);
- 
+
 //struct definition for Train Details
 
 struct Traininfo
@@ -225,13 +225,13 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
  {
  	cout<<"\n\nCUSTOMER RESERVATION RECORD"<<endl;
  	cout<<"TRAIN CODE: "<<train<<endl;
- 	cout<<"NAME: "<<getline(cin,name)<<endl;
+ 	cout<<"NAME: "<<name<<endl;
  	cout<<"ID NUMBER: "<<IC<<endl;
  	cout<<"PHONE NUMBER: "<<phone;
- 	cout<<"EMAIL: "<<getline(cin,email)<<endl;
+ 	cout<<"EMAIL: "<<email<<endl;
 	cout<<"CATEGORY: "<<category<<endl;
  	cout<<"QUANTITY: "<<quantity<<endl;
- 	cout<<"TOTAL PRICE: "<<price<endl;
+ 	cout<<"TOTAL PRICE: "<<price<<endl;
  	
  	cout<<"\n\nTHANK YOU!!";
  	
