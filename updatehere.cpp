@@ -1,5 +1,6 @@
 #include<iostream>
 #include<fstream>
+#include<string>
 using namespace std;
 //testing commit&pull
 //updatting test
@@ -8,6 +9,8 @@ using namespace std;
 //Function prototype
  float getPrice(int ,char ,float );
  void RecReserve(int , string , int , int , string , char , int , float);
+ void AddTDToFile(Traininfo);
+ 
 //struct definition for Train Details
 
 struct Traininfo
@@ -218,7 +221,7 @@ int main()
  
  
  //function to display customer reservation details
-void RecReserve(int train, string name, int IC. int phone, string email, char category, int quantity, float price)
+void RecReserve(int train, string name, int IC, int phone, string email, char category, int quantity, float price)
  {
  	cout<<"\n\nCUSTOMER RESERVATION RECORD"<<endl;
  	cout<<"TRAIN CODE: "<<train<<endl;
