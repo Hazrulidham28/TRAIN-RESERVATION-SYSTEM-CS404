@@ -7,7 +7,7 @@ using namespace std;
 //test3
 //Function prototype
  float getPrice(int ,char ,float );
- void CustReserve( string , string , int , int , string , char , int , float);
+ void RecReserve(int , string , int , int , string , char , int , float);
 //struct definition for Train Details
 
 struct Traininfo
@@ -23,9 +23,11 @@ struct Traininfo
 //struct definition for Reservation Details
 struct ReserveDetails
 {
+	int TrainCode;
     string CustName, CustEmail;
     int CustIC, CustPhone, quantity;
     char CustCategory;
+    float TicketPrice;
 };
 
 int main()
@@ -155,13 +157,10 @@ int main()
                 {
                 case 1:
                     // Reserve();
-                    //journeyCode for customer enter to select the journey schedule
-                    float totalprice;
-                    //Display train schedule
-                    
+                int totalprice;
                     //Enter Reservation Details
                     cout<<"Enter Train Code ";
-                    
+                    cin>>TrainDetails.TrainCode;
                     cout<<"Enter Name: ";
                     getline(cin,CustRec.CustName);
                     cout<<"Enter Identity Card Number: ";
@@ -174,8 +173,13 @@ int main()
                     cin>>CustRec.CustCategory;
                     cout<<"Enter Quantity: ";
                     cin>>CustRec.quantity;
-                    totalprice = getPrice (CustRec.quantity, CustRec.CustCategory, TrainDetails[i].PricePerTicket);
-                    CustReserve(string trainCode,string CustRec.CustName, int CustIC, int CustRec.CustPhone, string CustRec.CustEmail, char CustRec.CustCategory, int CustRec.quantity, float totalprice); 
+                    
+                    //to set Price perTicket
+                    if(CustRec.TrainCode == TrainDetails.TrainCode)
+                    CustRec.TicketPrice = TrainDetails.PricePerTicket;
+                    
+                    totalprice = getPrice (CustRec.quantity, CustRec.CustCategory, CustRec.TicketPrice);
+                    RecReserve(CustRec.TrainCode, CustRec.CustName, CustRec.CustIC, CustRec.CustPhone, CustRec.CustEmail, CustRec.CustCategory, CustRec.quantity, totalprice); 
                     break;
                 case 2:
                     // enquiry();
@@ -192,6 +196,9 @@ int main()
 
     return 0;
 }
+
+//function to make reservation
+
 
 //function to calculate total price
  float getPrice(int total,char type,float price)
@@ -211,7 +218,7 @@ int main()
  
  
  //function to display customer reservation details
- void CustReserve( string train, string name, int IC. int phone, string email, char category, int quantity, float price)
+void RecReserve(int train, string name, int IC. int phone, string email, char category, int quantity, float price)
  {
  	cout<<"\n\nCUSTOMER RESERVATION RECORD"<<endl;
  	cout<<"TRAIN CODE: "<<train<<endl;
