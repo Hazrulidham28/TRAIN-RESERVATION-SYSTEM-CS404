@@ -13,8 +13,9 @@ using namespace std;
 
  void AddTDToFile();
 
-//struct definition for Train Details
+void DeleteTrainD();
 
+//struct definition for Train Details
 struct Traininfo
 {
     int TrainCode;
@@ -123,10 +124,13 @@ int main()
 
                             break;
                         case 3:
-                           // Edittrain();
+
+                           //edittrain();
+
                             break;
                         case 4:
-                            // DeleteTrain();
+                        DeleteTrainD();
+                            
                             break;
                         default:
                             cout<<"you pick a wrong house fool!"<<endl;
@@ -263,3 +267,75 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
     }
     inputdetail.close();
 }
+
+//function to delete train record
+    void DeleteTrainD(){
+        //declare a variable to store the data from text file
+        string trainno,find,
+        Ostation,Dstation,Esttime,
+        priceTic,trainC;
+
+    //open the file system
+    fstream traindata,traintemp;
+
+        traindata.open("Traindetail.txt", ios::app);
+
+        if(traindata.fail()){
+        cout<<"\n\t\t\t file does not exist, please create first!!"<<endl;
+        cout<<"Press any key to continue"<<endl;
+        //close the file if the data is not exits
+        traindata.close();
+    }
+    else {
+    //promp user to input train no to search
+    cout<<"Please enter train no"<<endl;
+    cin>>find;
+
+        //open another temporary file
+        traintemp.open("temp.txt",ios::app | ios::out);
+
+        //input the data from traindata into the variable line by line
+        traindata>>trainno;
+        traindata>>Ostation;
+        traindata>>Dstation;
+        traindata>>Esttime;
+        traindata>>priceTic;
+        traindata>>trainC;
+            //read until end of the file
+            while(!traindata.eof()){
+                if(find!=trainno){
+                    //input data into temporary file
+                    traintemp<<trainno<<endl;
+                    traintemp<<Ostation<<endl;
+                    traintemp<<Dstation<<endl;
+                    traintemp<<Esttime<<endl;
+                    traintemp<<priceTic<<endl;
+                    traintemp<<trainC<<endl;
+                }
+                else{
+                    cout<<"The schedule has been successfully deleted...."<<endl;
+                }
+                //re-input the data line by line until end of file..
+                traindata>>trainno;
+                traindata>>Ostation;
+                traindata>>Dstation;
+                traindata>>Esttime;
+                traindata>>priceTic;
+                traindata>>trainC;
+            }
+            //close the file
+            traindata.close();  
+            traintemp.close();
+    //delete old data file
+    remove("Traindetail.txt");
+    //rename the temporary file as new train detail because its contain the latest updated data
+    rename("temp.txt","customer.txt");
+
+    
+    }
+    
+
+
+
+
+    }
