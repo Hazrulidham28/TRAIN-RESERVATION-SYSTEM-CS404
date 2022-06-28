@@ -72,6 +72,8 @@ int main()
 
                 }
                 if(authentication == true){
+                    system("CLS");//to close main menu output
+                    startStaff:
                     //menu in staff
                     int menustaff;
                     cout<<"Welcome"<<" "<<username<<"!!"<<endl;
