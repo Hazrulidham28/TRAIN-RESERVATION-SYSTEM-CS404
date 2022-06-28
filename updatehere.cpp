@@ -7,11 +7,13 @@ using namespace std;
 //testv2
 //test3
 //Function prototype
- float getPrice(int ,char ,float );
+void DisplayCustomer();
 
- void RecReserve(int , string , int , int , string , char , int , float);
+float getPrice(int ,char ,float );
 
- void AddTDToFile();
+void RecReserve(int , string , int , int , string , char , int , float);
+
+void AddTDToFile();
 
 void DeleteTrainD();
 
@@ -88,7 +90,8 @@ int main()
                         //void function statement to display customer
                         //kena letak comment kat function bawah ni sebab tak declare,kalau tak nanti bila run dia error 
                             //Displaycustomer();
-                            
+                        DisplayCustomer();
+							
                             break;
                         case 2:
                             
@@ -178,7 +181,7 @@ int main()
                     cin>>CustRec.CustPhone;
                     cout<<"Enter Email: ";
                     cin>>CustRec.CustEmail;
-                    cout<<"Enter S for senior citizen"<<endl<<"Enter T for student"<<endl<<"Enter O for OKU"<<endl<<"Enter N for normal citizen";
+                    cout<<"Enter S for senior citizen"<<endl<<"Enter T for student"<<endl<<"Enter O for OKU"<<endl<<"Enter N for normal citizen :";
                     cin>>CustRec.CustCategory;
                     cout<<"Enter Quantity: ";
                     cin>>CustRec.quantity;
@@ -206,7 +209,44 @@ int main()
     return 0;
 }
 
-//function to make reservation
+//function to display Reservation made by customer
+void DisplayCustomer()
+{
+	ifstream ReserveRecord;
+        ReserveRecord.open("ReserveRecord.txt",ios::app);
+    		if(ReserveRecord.fail())
+        {
+        	cout<<"input file does not exist"<<endl;
+    		cout<<"Press any key to continue"<<endl;
+		}
+						
+						
+         	int Train;
+            string Name;
+            int IC;
+            int Phone;
+            string Email;
+            char Category;
+            int Quantity;
+            float Price;
+            ReserveRecord>>Train>>Name>>IC>>Phone>>Email>>Category>>Quantity>>Price;
+            while (!ReserveRecord.eof())
+                            {
+                ReserveRecord>>Train>>Name>>IC>>Phone>>Email>>Category>>Quantity>>Price;
+					cout<<"TRAIN CODE: "<<Train<<endl;
+					cout<<"NAME: "<<Name<<endl;
+					cout<<"ID NUMBER: "<<IC<<endl;
+					cout<<"PHONE NUMBER: "<<Phone<<endl;
+					cout<<"EMAIL: "<<Email<<endl;
+					cout<<"CATEGORY: "<<Category<<endl;
+					cout<<"QUANTITY: "<<Quantity<<endl;
+					cout<<"TOTAL PRICE: "<<Price<<endl;
+					cout<<endl;
+							}
+			ReserveRecord.close();
+							
+}
+
 
 
 //function to calculate total price
@@ -233,7 +273,7 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
  	cout<<"TRAIN CODE: "<<train<<endl;
  	cout<<"NAME: "<<name<<endl;
  	cout<<"ID NUMBER: "<<IC<<endl;
- 	cout<<"PHONE NUMBER: "<<phone;
+ 	cout<<"PHONE NUMBER: "<<phone<<endl;
  	cout<<"EMAIL: "<<email<<endl;
 	cout<<"CATEGORY: "<<category<<endl;
  	cout<<"QUANTITY: "<<quantity<<endl;
@@ -241,25 +281,19 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
  	
  	cout<<"\n\nTHANK YOU!!";
  	
+ 	//Saving Customer Reservation Record into file name ReserveRecord
 	ofstream IntoFile;
  	IntoFile.open("ReserveRecord.txt",ios::app);
  	if(IntoFile.fail()){
  	cout<<"input file does not exist"<<endl;
     cout<<"Press any key to continue"<<endl;
     }
-    else {	
-    IntoFile<<"TRAIN CODE: "<<train<<endl;
- 	IntoFile<<"NAME: "<<name<<endl;
- 	IntoFile<<"ID NUMBER: "<<IC<<endl;
- 	IntoFile<<"PHONE NUMBER: "<<phone;
- 	IntoFile<<"EMAIL: "<<email<<endl;
-	IntoFile<<"CATEGORY: "<<category<<endl;
- 	IntoFile<<"QUANTITY: "<<quantity<<endl;
- 	IntoFile<<"TOTAL PRICE: "<<price<<endl<<endl;
- 	
+	
+    IntoFile<<train<<" "<<name<<" "<<IC<<" "<<phone<<" "<<email<<" "<<category<<" "<<quantity<<" "<<price<<endl;
+
  	IntoFile.close();
  	
- } }
+  }
 
  //function to input all data inputted by staff to a file system
  void AddTDToFile(){
@@ -351,8 +385,6 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
     
     }
     
-
-
 
 
     }
