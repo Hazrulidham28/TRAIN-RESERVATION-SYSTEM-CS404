@@ -11,6 +11,8 @@ using namespace std;
 
  void RecReserve(int , string , int , int , string , char , int , float);
 
+ void AddTDToFile();
+
 //struct definition for Train Details
 
 struct Traininfo
@@ -116,7 +118,7 @@ int main()
                                     cout<<"Please enter CLASS ('B','P','G','S'): ";
                                     cin>>TrainDetails.Class;
 
-                                    AddTDToFile(TrainDetails);
+                                    AddTDToFile();
                                 }
 
                             break;
@@ -239,8 +241,9 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
  }
 
  //function to input all data inputted by staff to a file system
- void AddTDToFile(Traininfo p){
+ void AddTDToFile(){
     fstream inputdetail;
+    Traininfo p;
 
     inputdetail.open("TrainDetails.txt", ios::app);
     if(inputdetail.fail()){
