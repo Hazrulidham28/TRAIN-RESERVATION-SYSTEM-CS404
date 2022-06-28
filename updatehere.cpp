@@ -171,13 +171,13 @@ int main()
                     cout<<"Enter Train Code ";
                     cin>>TrainDetails.TrainCode;
                     cout<<"Enter Name: ";
-                    getline(cin,CustRec.CustName);
+                    cin>>CustRec.CustName;
                     cout<<"Enter Identity Card Number: ";
                     cin>>CustRec.CustIC;
                     cout<<"Enter Phone Number: ";
                     cin>>CustRec.CustPhone;
                     cout<<"Enter Email: ";
-                    getline(cin,CustRec.CustEmail);
+                    cin>>CustRec.CustEmail;
                     cout<<"Enter S for senior citizen"<<endl<<"Enter T for student"<<endl<<"Enter O for OKU"<<endl<<"Enter N for normal citizen";
                     cin>>CustRec.CustCategory;
                     cout<<"Enter Quantity: ";
@@ -241,8 +241,25 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
  	
  	cout<<"\n\nTHANK YOU!!";
  	
+	ofstream IntoFile;
+ 	IntoFile.open("ReserveRecord.txt",ios::app);
+ 	if(IntoFile.fail()){
+ 	cout<<"input file does not exist"<<endl;
+    cout<<"Press any key to continue"<<endl;
+    }
+    else {	
+    IntoFile<<"TRAIN CODE: "<<train<<endl;
+ 	IntoFile<<"NAME: "<<name<<endl;
+ 	IntoFile<<"ID NUMBER: "<<IC<<endl;
+ 	IntoFile<<"PHONE NUMBER: "<<phone;
+ 	IntoFile<<"EMAIL: "<<email<<endl;
+	IntoFile<<"CATEGORY: "<<category<<endl;
+ 	IntoFile<<"QUANTITY: "<<quantity<<endl;
+ 	IntoFile<<"TOTAL PRICE: "<<price<<endl<<endl;
  	
- }
+ 	IntoFile.close();
+ 	
+ } }
 
  //function to input all data inputted by staff to a file system
  void AddTDToFile(){
