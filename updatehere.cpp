@@ -231,7 +231,6 @@ void DisplayCustomer()
             char Category;
             int Quantity;
             float Price;
-            ReserveRecord>>Train>>Name>>IC>>Phone>>Email>>Category>>Quantity>>Price;
             while (!ReserveRecord.eof())
                             {
                 ReserveRecord>>Train>>Name>>IC>>Phone>>Email>>Category>>Quantity>>Price;
@@ -291,7 +290,7 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
     cout<<"Press any key to continue"<<endl;
     }
 	
-    IntoFile<<train<<" "<<name<<" "<<IC<<" "<<phone<<" "<<email<<" "<<category<<" "<<quantity<<" "<<price<<endl;
+    IntoFile<<train<<endl<<name<<endl<<IC<<endl<<phone<<endl<<email<<endl<<category<<endl<<quantity<<endl<<price<<endl;
 
  	IntoFile.close();
  	
