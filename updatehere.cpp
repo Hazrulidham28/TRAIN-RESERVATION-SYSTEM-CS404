@@ -32,8 +32,11 @@ struct Traininfo
 struct ReserveDetails
 {
 	int TrainCode;
-    string CustName, CustEmail;
-    int CustIC, CustPhone, quantity;
+    string CustName;
+	string CustEmail;
+    int CustIC; 
+	int CustPhone;
+	int Quantity;
     char CustCategory;
     float TicketPrice;
 };
@@ -44,6 +47,8 @@ int main()
     int passStaff[4]={100,101,102,103};
     //Customer Details struct
     ReserveDetails CustRec;
+    // for display reservation record
+    
     //variable for adding train
     int AddMoreTrainInput;
     //link struct to a variable
@@ -174,7 +179,7 @@ int main()
                 int totalprice;
                     //Enter Reservation Details
                     cout<<"Enter Train Code ";
-                    cin>>TrainDetails.TrainCode;
+                    cin>>CustRec.TrainCode;
                     cout<<"Enter Name: ";
                     cin>>CustRec.CustName;
                     cout<<"Enter Identity Card Number: ";
@@ -186,14 +191,14 @@ int main()
                     cout<<"Enter S for senior citizen"<<endl<<"Enter T for student"<<endl<<"Enter O for OKU"<<endl<<"Enter N for normal citizen :";
                     cin>>CustRec.CustCategory;
                     cout<<"Enter Quantity: ";
-                    cin>>CustRec.quantity;
+                    cin>>CustRec.Quantity;
                     
                     //to set Price perTicket
                     if(CustRec.TrainCode == TrainDetails.TrainCode)
                     CustRec.TicketPrice = TrainDetails.PricePerTicket;
                     
-                    totalprice = getPrice (CustRec.quantity, CustRec.CustCategory, CustRec.TicketPrice);
-                    RecReserve(CustRec.TrainCode, CustRec.CustName, CustRec.CustIC, CustRec.CustPhone, CustRec.CustEmail, CustRec.CustCategory, CustRec.quantity, totalprice); 
+                    totalprice = getPrice (CustRec.Quantity, CustRec.CustCategory, CustRec.TicketPrice);
+                    RecReserve(CustRec.TrainCode, CustRec.CustName, CustRec.CustIC, CustRec.CustPhone, CustRec.CustEmail, CustRec.CustCategory, CustRec.Quantity, totalprice); 
                     break;
                 case 2:
                     // enquiry();
@@ -222,7 +227,7 @@ void DisplayCustomer()
     		cout<<"Press any key to continue"<<endl;
 		}
 						
-						
+			ReserveDetails DisplayReserve;
          	int Train;
             string Name;
             int IC;
@@ -233,15 +238,15 @@ void DisplayCustomer()
             float Price;
             while (!ReserveRecord.eof())
                             {
-                ReserveRecord>>Train>>Name>>IC>>Phone>>Email>>Category>>Quantity>>Price;
-					cout<<"TRAIN CODE: "<<Train<<endl;
-					cout<<"NAME: "<<Name<<endl;
-					cout<<"ID NUMBER: "<<IC<<endl;
-					cout<<"PHONE NUMBER: "<<Phone<<endl;
-					cout<<"EMAIL: "<<Email<<endl;
-					cout<<"CATEGORY: "<<Category<<endl;
-					cout<<"QUANTITY: "<<Quantity<<endl;
-					cout<<"TOTAL PRICE: "<<Price<<endl;
+                ReserveRecord>>DisplayReserve.TrainCode>>DisplayReserve.CustName>>DisplayReserve.CustIC>>DisplayReserve.CustPhone>>DisplayReserve.CustEmail>>DisplayReserve.CustCategory>>DisplayReserve.Quantity>>DisplayReserve.TicketPrice;
+					cout<<"TRAIN CODE: "<<DisplayReserve.TrainCode<<endl;
+					cout<<"NAME: "<<DisplayReserve.CustName<<endl;
+					cout<<"ID NUMBER: "<<DisplayReserve.CustIC<<endl;
+					cout<<"PHONE NUMBER: "<<DisplayReserve.CustPhone<<endl;
+					cout<<"EMAIL: "<<DisplayReserve.CustEmail<<endl;
+					cout<<"CATEGORY: "<<DisplayReserve.CustCategory<<endl;
+					cout<<"QUANTITY: "<<DisplayReserve.Quantity<<endl;
+					cout<<"TOTAL PRICE: "<<DisplayReserve.TicketPrice<<endl;
 					cout<<endl;
 							}
 			ReserveRecord.close();
