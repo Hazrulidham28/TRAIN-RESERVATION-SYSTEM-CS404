@@ -61,7 +61,7 @@ int main()
                         case 3:
                            // Edittrain();
                         	cout<<"--------EDIT TRAIN SCHEDULE--------"<<endl;
-                         	cout<<"--------EDIT TRAIN SCHEDULE--------"<<endl;
+				cout<<"-----------------------------------"<<endl<<endl;
 							
 							EditTrain()
                             break;
@@ -163,6 +163,7 @@ int main()
                 if(find!=Tcode)
 				{
                     //input data into temporary file
+				trainRecord<<Tcode<<endl;
 			        trainRecord<<Torigin<<endl;
 			        trainRecord<<Tdestation<<endl;
 			        trainRecord<<Tdepartime<<endl;
@@ -177,9 +178,11 @@ int main()
                 }
                 
                 //input new data
-                cout<<"Please enter the new records for TRAIN CODE "<<Tcode<<endl<<endl;
+                cout<<"Please enter the new train schedule records" <<endl<<endl;
                 
-			    trainRecord<<"Origin Station: ";
+			    trainRecord<<"Train Code: ";
+		    		cin>>ti.Tcode<<endl;
+		    	    trainRecord<<"Origin Station: ";
 				cin>>ti.Torigin<<endl;
 			    trainRecord<<"Destination Station: ";
 				cin>>ti.Tdestination<<endl;
