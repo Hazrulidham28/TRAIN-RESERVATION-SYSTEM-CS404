@@ -28,6 +28,8 @@ struct Traininfo
     float PricePerTicket;
     char Class;
 };
+struct Traininfo p;
+
 //struct definition for Reservation Details
 struct ReserveDetails
 {
@@ -101,36 +103,34 @@ int main()
 							
                             break;
                         case 2:
+                            system("CLS");
                             
                             cout<<"-------ADD TRAIN SCHEDULE----------"<<endl;
                             cout<<"-----------------------------------"<<endl<<endl;
-
-                            cout<<"Number of trains wanted to be add: "<<endl;
-                            cin>>AddMoreTrainInput;
-
-                                for(int i = 1; i<=AddMoreTrainInput; i++){
+                            
                                 //ask the staff to input the train details involved
-                                    cout<<"Please enter TRAIN CODE involved: "; 
-                                    cin>>TrainDetails.TrainCode;
-                                    cout<<"Please enter the ORIGIN station: ";
-                                    getline(cin>>ws, TrainDetails.OriginStation);
-                                    cout<<"Please enter the DESTINATION station: ";
-                                    getline(cin>>ws, TrainDetails.DestinationStation);
+                                    cout<<"Please enter TRAIN CODE: "<<endl; 
+                                    cin>>p.TrainCode;
+                                    cout<<"Please enter the ORIGIN station: "<<endl;
+                                    cin>>p.OriginStation;
+                                    cout<<"Please enter the DESTINATION station: "<<endl;
+                                    cin>>p.DestinationStation;
 
                                 //need some time to research libraries for TIME yg suitable
-                                     cout<<"Please enter DEPARTURE time: ";
-                                     cin>>TrainDetails.DepartureTime;
-                                     cout<<"Pleas enter ESTIMATED ARRIVAL time: ";
-                                     cin>>TrainDetails.EstTimeArrival;
+                                     cout<<"Please enter DEPARTURE time: "<<endl;
+                                     cin>>p.DepartureTime;
+                                     cout<<"Pleas enter ESTIMATED ARRIVAL time: "<<endl;
+                                     cin>>p.EstTimeArrival;
                                 //-------------------------------------------------------
 
-                                    cout<<"Please enter PRICE per ticket: ";
-                                    cin>>TrainDetails.PricePerTicket;
-                                    cout<<"Please enter CLASS ('B','P','G','S'): ";
-                                    cin>>TrainDetails.Class;
+                                    cout<<"Please enter PRICE per ticket: "<<endl;
+                                    cin>>p.PricePerTicket;
+                                    cout<<"Please enter CLASS ('B','P','G','S'): "<<endl;
+                                    cin>>p.Class;
 
                                     AddTDToFile();
-                                }
+                                    goto startStaff;
+                                
 
                             break;
                         case 3:
@@ -165,6 +165,7 @@ int main()
         }
         else if(menu1 == 2){
             int menucust;
+            
             //menu in customer
             cout<<"Welcome to train reservation system"<<endl;
             cout<<"Train schedule *taksiaplagi*"<<endl;
@@ -228,17 +229,10 @@ void DisplayCustomer()
 		}
 						
 			ReserveDetails DisplayReserve;
-         	int Train;
-            string Name;
-            int IC;
-            int Phone;
-            string Email;
-            char Category;
-            int Quantity;
-            float Price;
+         	ReserveRecord>>DisplayReserve.TrainCode>>DisplayReserve.CustName>>DisplayReserve.CustIC>>DisplayReserve.CustPhone>>DisplayReserve.CustEmail>>DisplayReserve.CustCategory>>DisplayReserve.Quantity>>DisplayReserve.TicketPrice;
             while (!ReserveRecord.eof())
-                            {
-                ReserveRecord>>DisplayReserve.TrainCode>>DisplayReserve.CustName>>DisplayReserve.CustIC>>DisplayReserve.CustPhone>>DisplayReserve.CustEmail>>DisplayReserve.CustCategory>>DisplayReserve.Quantity>>DisplayReserve.TicketPrice;
+             {
+                
 					cout<<"TRAIN CODE: "<<DisplayReserve.TrainCode<<endl;
 					cout<<"NAME: "<<DisplayReserve.CustName<<endl;
 					cout<<"ID NUMBER: "<<DisplayReserve.CustIC<<endl;
@@ -248,6 +242,8 @@ void DisplayCustomer()
 					cout<<"QUANTITY: "<<DisplayReserve.Quantity<<endl;
 					cout<<"TOTAL PRICE: "<<DisplayReserve.TicketPrice<<endl;
 					cout<<endl;
+
+                    ReserveRecord>>DisplayReserve.TrainCode>>DisplayReserve.CustName>>DisplayReserve.CustIC>>DisplayReserve.CustPhone>>DisplayReserve.CustEmail>>DisplayReserve.CustCategory>>DisplayReserve.Quantity>>DisplayReserve.TicketPrice;
 							}
 			ReserveRecord.close();
 							
@@ -304,24 +300,16 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
  //function to input all data inputted by staff to a file system
  void AddTDToFile(){
     fstream inputdetail;
-    Traininfo p;
-
     inputdetail.open("TrainDetails.txt", ios::app);
-    if(inputdetail.fail()){
-        cout<<"input file does not exist"<<endl;
-        cout<<"Press any key to continue"<<endl;
-    }
-    else {
-    inputdetail<<endl;
-    inputdetail<<"Train Code: "<<p.TrainCode<<endl;
-    inputdetail<<"Origin Station: "<<p.OriginStation<<endl;
-    inputdetail<<"Destination Station: "<<p.DestinationStation<<endl;
-    inputdetail<<"Departure Time: "<<p.DepartureTime<<endl;
-    inputdetail<<"Estimate Time Arrival: "<<p.EstTimeArrival<<endl;
-    inputdetail<<"Price per Ticket: "<<p.PricePerTicket<<endl;
-    inputdetail<<"Train Class: "<<p.Class<<endl;
+    inputdetail<<p.TrainCode<<endl;
+    inputdetail<<p.OriginStation<<endl;
+    inputdetail<<p.DestinationStation<<endl;
+    inputdetail<<p.DepartureTime<<endl;
+    inputdetail<<p.EstTimeArrival<<endl;
+    inputdetail<<p.PricePerTicket<<endl;
+    inputdetail<<p.Class<<endl<<endl;
         
-    }
+    
     inputdetail.close();
 }
 
@@ -330,12 +318,12 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
         //declare a variable to store the data from text file
         string trainno,find,
         Ostation,Dstation,Esttime,
-        priceTic,trainC;
+        priceTic,trainClass,DepTime;
 
     //open the file system
     fstream traindata,traintemp;
 
-        traindata.open("Traindetail.txt", ios::app);
+        traindata.open("Traindetails.txt", ios::in);
 
         if(traindata.fail()){
         cout<<"\n\t\t\t file does not exist, please create first!!"<<endl;
@@ -355,9 +343,10 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
         traindata>>trainno;
         traindata>>Ostation;
         traindata>>Dstation;
+        traindata>>DepTime;
         traindata>>Esttime;
         traindata>>priceTic;
-        traindata>>trainC;
+        traindata>>trainClass;
             //read until end of the file
             while(!traindata.eof()){
                 if(find!=trainno){
@@ -365,9 +354,11 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
                     traintemp<<trainno<<endl;
                     traintemp<<Ostation<<endl;
                     traintemp<<Dstation<<endl;
+                    traintemp<<DepTime<<endl;
                     traintemp<<Esttime<<endl;
                     traintemp<<priceTic<<endl;
-                    traintemp<<trainC<<endl;
+                    traintemp<<trainClass<<endl<<endl;
+    
                 }
                 else{
                     cout<<"The schedule has been successfully deleted...."<<endl;
@@ -376,17 +367,19 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
                 traindata>>trainno;
                 traindata>>Ostation;
                 traindata>>Dstation;
+                traindata>>DepTime;
                 traindata>>Esttime;
                 traindata>>priceTic;
-                traindata>>trainC;
+                traindata>>trainClass;
             }
             //close the file
             traindata.close();  
             traintemp.close();
     //delete old data file
-    remove("Traindetail.txt");
+    remove("Traindetails.txt");
     //rename the temporary file as new train detail because its contain the latest updated data
-    rename("temp.txt","customer.txt");
+    rename("temp.txt","Traindetails.txt");
+
 
     
     }
