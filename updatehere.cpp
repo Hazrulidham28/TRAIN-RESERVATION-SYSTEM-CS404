@@ -5,6 +5,7 @@ using namespace std;
 //testv2
 //test3
 
+void EditTrain();
 
 int main()
 {   //An array to store staff name and password used to login
@@ -59,6 +60,10 @@ int main()
                             break;
                         case 3:
                            // Edittrain();
+                        	cout<<"--------EDIT TRAIN SCHEDULE--------"<<endl;
+                         	cout<<"--------EDIT TRAIN SCHEDULE--------"<<endl;
+							
+							EditTrain()
                             break;
                         case 4:
                             // DeleteTrain();
@@ -113,3 +118,90 @@ int main()
 
     return 0;
 }
+
+    //function to edit train record by staff
+    void EditTrain()
+	{
+        //declare a variable to store the data from text file
+        string Tfind,Tcode,Torigin,Tdestination,Tdepartime,Tarrivetime,TpriceTic,Tclass;
+        Traininfo ti;
+
+    //open the file system
+    fstream trainRecord,tempRecord;
+
+        trainRecord.open("Traindetail.txt", ios::app);
+
+        if(trainRecord.fail())
+		{
+	        cout<<"\n\t\t\t file does not exist, please create first!!"<<endl;
+	        cout<<"Press any key to continue"<<endl;
+	        //close the file if the data is not exits
+	        traindata.close();
+    	}
+    	
+    	else
+		{
+    		//promp user to search any train by code
+		    cout<<"Please enter Train Code to change all the records"<<endl;
+		    cin>>Tfind;
+
+	        //open another temporary file
+	        traintemp.open("temp.txt",ios::app | ios::out);
+	
+	        //input the data from traindata into the variable line by line
+	        trainRecord>>Tcode;
+	        trainRecord>>Torigin;
+	        trainRecord>>Tdestation;
+	        trainRecord>>Tdepartime;
+	        trainRecord>>Tarrivetime;
+	        trainRecord>>TpriceTic;
+	        trainRecord>>Tclass;
+	        
+            //read until end of the file
+            while(!trainRecord.eof())
+			{
+                if(find!=Tcode)
+				{
+                    //input data into temporary file
+			        trainRecord<<Torigin<<endl;
+			        trainRecord<<Tdestation<<endl;
+			        trainRecord<<Tdepartime<<endl;
+			        trainRecord<<Tarrivetime<<endl;
+			        trainRecord<<TpriceTic<<endl;
+			        trainRecord<<Tclass<<endl;
+                }
+                
+                else
+				{
+                    cout<<"The record for train code "<<Tcode<<"has been successfully deleted...."<<endl;
+                }
+                
+                //input new data
+                cout<<"Please enter the new records for TRAIN CODE "<<Tcode<<endl<<endl;
+                
+			    trainRecord<<"Origin Station: ";
+				cin>>ti.Torigin<<endl;
+			    trainRecord<<"Destination Station: ";
+				cin>>ti.Tdestination<<endl;
+			    trainRecord<<"Departure Time: ";
+				cin>>ti.Tdepartime<<endl;
+			    trainRecord<<"Estimate Time Arrival: ";
+				cin>>ti.Tarrivetime<<endl;
+			    trainRecord<<"Price per Ticket: ";
+				cin>>ti.TpriceTic<<endl;
+			    trainRecord<<"Train Class: ";
+				cin>>ti.Tclass<<endl;
+			    
+				cout<<"\nRecord successfully edited";
+            }
+            //close the file
+            trainRecord.close();  
+            tempRecord.close();
+    //delete old data file
+    remove("Traindetail.txt");
+    //rename the temporary file as new train detail because its contain the latest updated data
+    rename("temp.txt","customer.txt");
+
+    
+    	}
+    }
