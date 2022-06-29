@@ -1,6 +1,10 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+#include<signal.h>
+#include<stdlib.h>
+#include<string.h>
+
 using namespace std;
 //testing commit&pull
 //updatting test
@@ -17,15 +21,17 @@ void AddTDToFile();
 
 void DeleteTrainD();
 
+void DisplayTrip();
+
 //struct definition for Train Details
 struct Traininfo
 {
     int TrainCode;
     string OriginStation;
     string DestinationStation;
-    float DepartureTime;
-    float EstTimeArrival;
-    float PricePerTicket;
+    string DepartureTime;
+    string EstTimeArrival;
+    int PricePerTicket;
     char Class;
 };
 struct Traininfo p;
@@ -112,9 +118,9 @@ int main()
                                     cout<<"Please enter TRAIN CODE: "<<endl; 
                                     cin>>p.TrainCode;
                                     cout<<"Please enter the ORIGIN station: "<<endl;
-                                    cin>>p.OriginStation;
+                                    getline(cin>>ws,p.OriginStation);
                                     cout<<"Please enter the DESTINATION station: "<<endl;
-                                    cin>>p.DestinationStation;
+                                    getline(cin>>ws,p.DestinationStation);
 
                                 //need some time to research libraries for TIME yg suitable
                                      cout<<"Please enter DEPARTURE time: "<<endl;
@@ -165,6 +171,7 @@ int main()
         }
         else if(menu1 == 2){
             int menucust;
+            DisplayTrip();
             
             //menu in customer
             cout<<"Welcome to train reservation system"<<endl;
@@ -182,13 +189,13 @@ int main()
                     cout<<"Enter Train Code ";
                     cin>>CustRec.TrainCode;
                     cout<<"Enter Name: ";
-                    cin>>CustRec.CustName;
+                    getline(cin>>ws,CustRec.CustName);
                     cout<<"Enter Identity Card Number: ";
                     cin>>CustRec.CustIC;
                     cout<<"Enter Phone Number: ";
                     cin>>CustRec.CustPhone;
                     cout<<"Enter Email: ";
-                    cin>>CustRec.CustEmail;
+                    getline(cin>>ws,CustRec.CustEmail);
                     cout<<"Enter S for senior citizen"<<endl<<"Enter T for student"<<endl<<"Enter O for OKU"<<endl<<"Enter N for normal citizen :";
                     cin>>CustRec.CustCategory;
                     cout<<"Enter Quantity: ";
@@ -387,3 +394,27 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
 
 
     }
+
+    //function to display train schedule
+
+    void DisplayTrip()
+{
+	ifstream TrainSchedule;
+		TrainSchedule.open("TrainDetails.txt");
+			if(TrainSchedule.fail())
+			{
+			cout<<"input file does not exist"<<endl;
+    		cout<<"Press any key to continue"<<endl;
+			}
+		
+			    
+			cout<<"TrainCode\t Origin Station\t Destination Station\t Departure Time\t Estimate Time Arrival\t Price/Ticket\t Class"<<endl;
+			TrainSchedule>>p.TrainCode>>p.OriginStation>>p.DestinationStation>>p.DepartureTime>>p.EstTimeArrival>>p.PricePerTicket>>p.Class;
+			while(!TrainSchedule.eof()) 
+			{
+				cout<<"  "<<p.TrainCode<<"\t\t\t"<<p.OriginStation<<"\t\t"<<p.DestinationStation<<"\t\t\t"<<p.DepartureTime<<"\t\t"<<p.EstTimeArrival<<"\t\t    "<<p.PricePerTicket<<"	\t   "<<p.Class;
+			  cout<<endl;
+			  TrainSchedule>>p.TrainCode>>p.OriginStation>>p.DestinationStation>>p.DepartureTime>>p.EstTimeArrival>>p.PricePerTicket>>p.Class;
+			   }   
+			TrainSchedule.close();
+		}
