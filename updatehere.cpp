@@ -13,7 +13,7 @@ using namespace std;
 //Function prototype
 void DisplayCustomer();
 
-float getPrice(int ,char ,float );
+float getPrice(int ,char ,int);
 
 void RecReserve(int , string , int , int , string , char , int , float);
 
@@ -184,7 +184,7 @@ int main()
                 {
                 case 1:
                     // Reserve();
-                int totalprice;
+                float totalprice;
                     //Enter Reservation Details
                     cout<<"Enter Train Code ";
                     cin>>CustRec.TrainCode;
@@ -202,11 +202,10 @@ int main()
                     cin>>CustRec.Quantity;
                     
                     //to set Price perTicket
-                    float temprice;
-                    if(CustRec.TrainCode == TrainDetails.TrainCode){
-                    CustRec.TicketPrice = temprice;}
+                   
                     
-                    totalprice = getPrice (CustRec.Quantity, CustRec.CustCategory, temprice);
+                    
+                    totalprice = getPrice (CustRec.Quantity, CustRec.CustCategory,CustRec.TrainCode);
                     RecReserve(CustRec.TrainCode, CustRec.CustName, CustRec.CustIC, CustRec.CustPhone, CustRec.CustEmail, CustRec.CustCategory, CustRec.Quantity, totalprice); 
                     break;
                 case 2:
@@ -237,7 +236,7 @@ void DisplayCustomer()
 		}
 						
 			ReserveDetails DisplayReserve;
-         	ReserveRecord>>DisplayReserve.TrainCode>>DisplayReserve.CustName>>DisplayReserve.CustIC>>DisplayReserve.CustPhone>>DisplayReserve.CustEmail>>DisplayReserve.CustCategory>>DisplayReserve.Quantity>>DisplayReserve.TicketPrice;
+         	ReserveRecord>>p.TrainCode>>DisplayReserve.CustName>>DisplayReserve.CustIC>>DisplayReserve.CustPhone>>DisplayReserve.CustEmail>>DisplayReserve.CustCategory>>DisplayReserve.Quantity>>DisplayReserve.TicketPrice;
             while (!ReserveRecord.eof())
              {
                 
@@ -260,19 +259,38 @@ void DisplayCustomer()
 
 
 //function to calculate total price
- float getPrice(int total,char type,float &price)
- {
- 	float totalprice;
+ float getPrice(int total,char type,int TrainCode)
+ {  float temprice;
+    ifstream showrecord;
+        showrecord.open("Traindetails.txt",ios::app);
+    		if(showrecord.fail())
+        {
+        	cout<<"input file does not exist"<<endl;
+    		cout<<"Press any key to continue"<<endl;
+		}
+			//open the data from traindetails to get the ticket price per train		
+			ReserveDetails DisplayReserve;
+         	showrecord>>p.TrainCode>>p.OriginStation>>p.DestinationStation>>p.DepartureTime>>p.EstTimeArrival>>p.PricePerTicket>>p.Class;
+            while (!showrecord.eof())
+             {
+                    //if found same train code with user input, set the price into temprice
+					if(TrainCode == p.TrainCode){
+                    temprice = p.PricePerTicket;}
+
+                    showrecord>>p.TrainCode>>p.OriginStation>>p.DestinationStation>>p.DepartureTime>>p.EstTimeArrival>>p.PricePerTicket>>p.Class;}
+			showrecord.close();
+    //calculate price of the train received
+ 	float totalprices;
      if (type == 'S' || type == 's')
-     totalprice=total * 0.50 * price;
+     totalprices=total * 0.50 * temprice;
      else if (type == 'T' || type == 't')
-     totalprice=total * 0.30 * price;
+     totalprices=total * 0.30 * temprice;
      else if (type == 'O' || type == 'o')
-     totalprice=total * 0.50 * price;
+     totalprices=total * 0.50 * temprice;
       else if (type == 'N' || type == 'n')
-     totalprice=total * price;
+     totalprices=total * temprice;
      
-     return totalprice;
+     return totalprices;
  }
  
  
