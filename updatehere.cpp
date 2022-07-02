@@ -202,10 +202,11 @@ int main()
                     cin>>CustRec.Quantity;
                     
                     //to set Price perTicket
-                    if(CustRec.TrainCode == TrainDetails.TrainCode)
-                    CustRec.TicketPrice = TrainDetails.PricePerTicket;
+                    float temprice;
+                    if(CustRec.TrainCode == TrainDetails.TrainCode){
+                    CustRec.TicketPrice = temprice;}
                     
-                    totalprice = getPrice (CustRec.Quantity, CustRec.CustCategory, CustRec.TicketPrice);
+                    totalprice = getPrice (CustRec.Quantity, CustRec.CustCategory, temprice);
                     RecReserve(CustRec.TrainCode, CustRec.CustName, CustRec.CustIC, CustRec.CustPhone, CustRec.CustEmail, CustRec.CustCategory, CustRec.Quantity, totalprice); 
                     break;
                 case 2:
@@ -259,7 +260,7 @@ void DisplayCustomer()
 
 
 //function to calculate total price
- float getPrice(int total,char type,float price)
+ float getPrice(int total,char type,float &price)
  {
  	float totalprice;
      if (type == 'S' || type == 's')
