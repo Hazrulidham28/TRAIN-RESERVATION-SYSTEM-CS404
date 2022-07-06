@@ -12,7 +12,7 @@ void DisplayCustomer();
 
 float getPrice(int ,char ,int);
 
-void RecReserve(int , string , int , int , string , char , int , float);
+void RecReserve(int , string , int , int , string , char , int , float&);
 
 void AddTDToFile();
 
@@ -208,7 +208,7 @@ int main()
 					cout<<"CATEGORY NOT FOUND"<<endl;
 					cout<<"PLEASE REMAKE YOUR RESERVATION "<<endl;
 					cout<<"----------------------------------"<<endl<<endl;
-                    }goto startReserve;
+                    goto startReserve;}
                     cout<<"Enter Quantity: ";
                     cin>>CustRec.Quantity;
                     
@@ -319,7 +319,7 @@ void DisplayCustomer()
  
  
  //function to display customer reservation details
-void RecReserve(int train, string name, int IC, int phone, string email, char category, int quantity, float price)
+void RecReserve(int train, string name, int IC, int phone, string email, char category, int quantity, float& price)
  {
  	cout<<"\n\nCUSTOMER RESERVATION RECORD"<<endl;
  	cout<<"TRAIN CODE: "<<train<<endl;
