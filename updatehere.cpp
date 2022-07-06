@@ -6,10 +6,7 @@
 #include<string.h>
 
 using namespace std;
-//testing commit&pull
-//updatting test
-//testv2
-//test3
+
 //Function prototype
 void DisplayCustomer();
 
@@ -149,7 +146,7 @@ int main()
                             
                             break;
                         default:
-                            cout<<"you pick a wrong house fool!"<<endl;
+                            cout<<"wrong code!!!"<<endl;
                             break;
                         }
 
