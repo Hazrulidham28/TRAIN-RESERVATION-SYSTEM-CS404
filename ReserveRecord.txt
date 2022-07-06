@@ -32,12 +32,4 @@ Manann
 kfg
 N
 3
-nan
-999
-MAnannnf
-34
-434
-gg
-S
-3
-66
+0

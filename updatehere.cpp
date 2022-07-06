@@ -93,6 +93,7 @@ int main()
                     cout<<"[2]:Add train schedule"<<endl;
                     cout<<"[3]:Edit train schedule"<<endl;
                     cout<<"[4]:Delete train schedule"<<endl;
+                    cout<<"[5]:To exit"<<endl;
                     cout<<"Please input choice"<<endl;
                     cin>>menustaff;
 
@@ -143,10 +144,15 @@ int main()
                             break;
                         case 4:
                         DeleteTrainD();
+						goto startStaff;
                             
                             break;
+                        case 5:
+                        	system("CLS");
+                        	cout<<"THANK YOU!";
+                        	
                         default:
-                            cout<<"wrong code!!!"<<endl;
+                            
                             break;
                         }
 
@@ -168,13 +174,14 @@ int main()
         }
         else if(menu1 == 2){
             int menucust;
+        	startReserve:
             DisplayTrip();
             
             //menu in customer
             cout<<"Welcome to train reservation system"<<endl;
-            cout<<"Train schedule *taksiaplagi*"<<endl;
-            cout<<"[1]: Reservation"<<endl;
+            cout<<"[1]:Reservation"<<endl;
             cout<<"[2]:Enquiry"<<endl;
+            cout<<"[3]:TO EXIT"<<endl;
             cin>>menucust;
 
                 switch (menucust)
@@ -195,6 +202,13 @@ int main()
                     getline(cin>>ws,CustRec.CustEmail);
                     cout<<"Enter S for senior citizen"<<endl<<"Enter T for student"<<endl<<"Enter O for OKU"<<endl<<"Enter N for normal citizen :";
                     cin>>CustRec.CustCategory;
+                    if ( CustRec.CustCategory != 'S' && CustRec.CustCategory != 's' && CustRec.CustCategory !='T' && CustRec.CustCategory !='t' && CustRec.CustCategory !='O'&& CustRec.CustCategory !='o' && CustRec.CustCategory !='N' && CustRec.CustCategory !='n'){
+                    system("CLS");
+                    cout<<"----------------------------------"<<endl;
+					cout<<"CATEGORY NOT FOUND"<<endl;
+					cout<<"PLEASE REMAKE YOUR RESERVATION "<<endl;
+					cout<<"----------------------------------"<<endl<<endl;
+                    }goto startReserve;
                     cout<<"Enter Quantity: ";
                     cin>>CustRec.Quantity;
                     
@@ -204,13 +218,27 @@ int main()
                     
                     totalprice = getPrice (CustRec.Quantity, CustRec.CustCategory,CustRec.TrainCode);
                     RecReserve(CustRec.TrainCode, CustRec.CustName, CustRec.CustIC, CustRec.CustPhone, CustRec.CustEmail, CustRec.CustCategory, CustRec.Quantity, totalprice); 
+                	goto startReserve;
                     break;
                 case 2:
-                    // enquiry();
+                    //enquery
+                system("CLS");
+                cout<<"------------------------------------------------------"<<endl;
+            	cout<<"\tTHANK YOU FOR USING OUR SYSTEM"<<endl;
+            	cout<<"We will provide the best for while using our system"<<endl;
+            	cout<<"For any enqueiry, you can contact:-"<<endl;
+            	cout<<"Mr Idham - 0173492387"<<endl;
+            	cout<<"Mr Najmi - 0138572034"<<endl;
+            	cout<<"Mr Hard D - 013452074"<<endl;
+            	cout<<"Mr Alip Puey - 01545472034"<<endl;
+            	cout<<"------------------------------------------------------"<<endl;
                     break;
                 
+                case 3:
+                system("CLS");
+                	cout<<"THANK YOU FOR USING OUR SERVICE";
+                
                 default:
-                    cout<<"Wrong choice!!"<<endl;
                     break;
                 }
 
@@ -286,7 +314,6 @@ void DisplayCustomer()
      totalprices=total * 0.50 * temprice;
       else if (type == 'N' || type == 'n')
      totalprices=total * temprice;
-     
      return totalprices;
  }
  
@@ -317,7 +344,7 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
     IntoFile<<train<<endl<<name<<endl<<IC<<endl<<phone<<endl<<email<<endl<<category<<endl<<quantity<<endl<<price<<endl;
 
  	IntoFile.close();
- 	
+
   }
 
  //function to input all data inputted by staff to a file system
