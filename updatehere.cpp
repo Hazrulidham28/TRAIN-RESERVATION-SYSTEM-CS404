@@ -108,8 +108,8 @@ int main()
                         //void function statement to display customer
                         //kena letak comment kat function bawah ni sebab tak declare,kalau tak nanti bila run dia error 
                             //Displaycustomer();
-                        DisplayCustomer(Totcust);
-                        cout<<"The total of customer is "<<Totcust<<endl;
+                             DisplayCustomer(Totcust);
+                                cout<<"The total of customer is "<<Totcust<<endl;
 							
                             break;
                         case 2:
@@ -149,13 +149,13 @@ int main()
 
                             break;
                         case 4:
-                        DeleteTrainD();
-						goto startStaff;
+                            DeleteTrainD();
+						    goto startStaff;
                             
                             break;
                         case 5:
-                        	system("CLS");
-                        	cout<<"THANK YOU!";
+                        	    system("CLS");
+                        	    cout<<"THANK YOU!";
                         
                         	
                         default:
@@ -315,13 +315,13 @@ void DisplayCustomer(int& totcus)
     //calculate price of the train received
  	float totalprices;
      if (type == 'S' || type == 's')
-     totalprices=total * 0.50 * temprice;
+        totalprices=total * 0.50 * temprice;
      else if (type == 'T' || type == 't')
-     totalprices=total * 0.30 * temprice;
+        totalprices=total * 0.30 * temprice;
      else if (type == 'O' || type == 'o')
-     totalprices=total * 0.50 * temprice;
+        totalprices=total * 0.50 * temprice;
       else if (type == 'N' || type == 'n')
-     totalprices=total * temprice;
+        totalprices=total * temprice;
      return totalprices;
  }
  
@@ -345,7 +345,7 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
 	ofstream IntoFile;
  	IntoFile.open("ReserveRecord.txt",ios::app);
  	if(IntoFile.fail()){
- 	cout<<"input file does not exist"<<endl;
+ 	    cout<<"input file does not exist"<<endl;
     cout<<"Press any key to continue"<<endl;
     }
 	
@@ -384,7 +384,7 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
         traindata.open("Traindetails.txt", ios::in);
 
         if(traindata.fail()){
-        cout<<"\n\t\t\t file does not exist, please create first!!"<<endl;
+            cout<<"\n\t\t\t file does not exist, please create first!!"<<endl;
         cout<<"Press any key to continue"<<endl;
         //close the file if the data is not exits
         traindata.close();
@@ -454,20 +454,20 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
 		TrainSchedule.open("TrainDetails.txt");
 			if(TrainSchedule.fail())
 			{
-			cout<<"input file does not exist"<<endl;
+			    cout<<"input file does not exist"<<endl;
     		cout<<"Press any key to continue"<<endl;
 			}
 		
 			    
 			cout<<"TrainCode\t Origin Station\t Destination Station\t Departure Time\t Estimate Time Arrival\t Price/Ticket\t Class"<<endl;
-			TrainSchedule>>p.TrainCode>>p.OriginStation>>p.DestinationStation>>p.DepartureTime>>p.EstTimeArrival>>p.PricePerTicket>>p.Class;
-			while(!TrainSchedule.eof()) 
-			{
-				cout<<"  "<<p.TrainCode<<"\t\t\t"<<p.OriginStation<<"\t\t"<<p.DestinationStation<<"\t\t\t"<<p.DepartureTime<<"\t\t"<<p.EstTimeArrival<<"\t\t    "<<p.PricePerTicket<<"	\t   "<<p.Class;
-			  cout<<endl;
-			  TrainSchedule>>p.TrainCode>>p.OriginStation>>p.DestinationStation>>p.DepartureTime>>p.EstTimeArrival>>p.PricePerTicket>>p.Class;
-			   }   
-			TrainSchedule.close();
+			    TrainSchedule>>p.TrainCode>>p.OriginStation>>p.DestinationStation>>p.DepartureTime>>p.EstTimeArrival>>p.PricePerTicket>>p.Class;
+			        while(!TrainSchedule.eof()) 
+			            {
+			            	cout<<"  "<<p.TrainCode<<"\t\t\t"<<p.OriginStation<<"\t\t"<<p.DestinationStation<<"\t\t\t"<<p.DepartureTime<<"\t\t"<<p.EstTimeArrival<<"\t\t    "<<p.PricePerTicket<<"	\t   "<<p.Class;
+			                     cout<<endl;
+			             TrainSchedule>>p.TrainCode>>p.OriginStation>>p.DestinationStation>>p.DepartureTime>>p.EstTimeArrival>>p.PricePerTicket>>p.Class;
+			             }   
+			    TrainSchedule.close();
 		}
 
   
