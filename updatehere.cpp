@@ -8,7 +8,7 @@
 using namespace std;
 
 //Function prototype
-void DisplayCustomer();
+void DisplayCustomer(int &);
 
 float getPrice(int ,char ,int);
 
@@ -19,6 +19,8 @@ void AddTDToFile();
 void DeleteTrainD();
 
 void DisplayTrip();
+
+
 
 //struct definition for Train Details
 struct Traininfo
@@ -48,8 +50,10 @@ struct ReserveDetails
 
 int main()
 {   //An array to store staff name and password used to login
-    string staff[4]={"Idham","Alif","Hadi","Najmi"};
-    int passStaff[4]={100,101,102,103};
+    int Totstaff =5;
+    int Totcust=0,Totschedule=0;
+    string staff[Totstaff]={"Idham","Alif","Hadi","Najmi","Admin"};
+    int passStaff[Totstaff]={100,101,102,103,104};
     //Customer Details struct
     ReserveDetails CustRec;
     // for display reservation record
@@ -76,7 +80,7 @@ int main()
             cin>>username;
             cin>>pass1;
                 //for statement to check authentication off password and username
-                for(int i =0;i<4;i++){
+                for(int i =0;i<Totstaff;i++){
                     if(username == staff[i] && pass1 == passStaff[i]){
                         authentication = true;
                     }
@@ -94,6 +98,7 @@ int main()
                     cout<<"[3]:Edit train schedule"<<endl;
                     cout<<"[4]:Delete train schedule"<<endl;
                     cout<<"[5]:To exit"<<endl;
+                   
                     cout<<"Please input choice"<<endl;
                     cin>>menustaff;
 
@@ -103,7 +108,8 @@ int main()
                         //void function statement to display customer
                         //kena letak comment kat function bawah ni sebab tak declare,kalau tak nanti bila run dia error 
                             //Displaycustomer();
-                        DisplayCustomer();
+                        DisplayCustomer(Totcust);
+                        cout<<"The total of customer is "<<Totcust<<endl;
 							
                             break;
                         case 2:
@@ -150,6 +156,7 @@ int main()
                         case 5:
                         	system("CLS");
                         	cout<<"THANK YOU!";
+                        
                         	
                         default:
                             
@@ -250,8 +257,8 @@ int main()
 }
 
 //function to display Reservation made by customer
-void DisplayCustomer()
-{
+void DisplayCustomer(int& totcus)
+{   int count=0;
 	ifstream ReserveRecord;
         ReserveRecord.open("ReserveRecord.txt",ios::app);
     		if(ReserveRecord.fail())
@@ -259,12 +266,12 @@ void DisplayCustomer()
         	cout<<"input file does not exist"<<endl;
     		cout<<"Press any key to continue"<<endl;
 		}
-						
+					
 			ReserveDetails DisplayReserve;
          	ReserveRecord>>p.TrainCode>>DisplayReserve.CustName>>DisplayReserve.CustIC>>DisplayReserve.CustPhone>>DisplayReserve.CustEmail>>DisplayReserve.CustCategory>>DisplayReserve.Quantity>>DisplayReserve.TicketPrice;
             while (!ReserveRecord.eof())
              {
-                
+                    count=count+1;
 					cout<<"TRAIN CODE: "<<DisplayReserve.TrainCode<<endl;
 					cout<<"NAME: "<<DisplayReserve.CustName<<endl;
 					cout<<"ID NUMBER: "<<DisplayReserve.CustIC<<endl;
@@ -278,6 +285,7 @@ void DisplayCustomer()
                     ReserveRecord>>DisplayReserve.TrainCode>>DisplayReserve.CustName>>DisplayReserve.CustIC>>DisplayReserve.CustPhone>>DisplayReserve.CustEmail>>DisplayReserve.CustCategory>>DisplayReserve.Quantity>>DisplayReserve.TicketPrice;
 							}
 			ReserveRecord.close();
+            totcus=count;
 							
 }
 
@@ -461,3 +469,5 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
 			   }   
 			TrainSchedule.close();
 		}
+
+  
