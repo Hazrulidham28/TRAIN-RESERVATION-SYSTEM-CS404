@@ -292,7 +292,7 @@ void DisplayCustomer(int& totcus)
 		}
 					
 			ReserveDetails DisplayReserve;
-         	ReserveRecord>>p.TrainCode>>DisplayReserve.CustName>>DisplayReserve.CustIC>>DisplayReserve.CustPhone>>DisplayReserve.CustEmail>>DisplayReserve.CustCategory>>DisplayReserve.Quantity>>DisplayReserve.TicketPrice;
+         	ReserveRecord>>DisplayReserve.TrainCode>>DisplayReserve.CustName>>DisplayReserve.CustIC>>DisplayReserve.CustPhone>>DisplayReserve.CustEmail>>DisplayReserve.CustCategory>>DisplayReserve.Quantity>>DisplayReserve.TicketPrice;
             while (!ReserveRecord.eof())
              {
                     count=count+1;
