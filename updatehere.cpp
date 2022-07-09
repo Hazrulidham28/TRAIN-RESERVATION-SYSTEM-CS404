@@ -20,6 +20,7 @@ void DeleteTrainD();
 
 void DisplayTrip();
 
+void EditTrainD();
 
 
 //struct definition for Train Details
@@ -50,10 +51,9 @@ struct ReserveDetails
 
 int main()
 {   //An array to store staff name and password used to login
-    int Totstaff =5;
     int Totcust=0,Totschedule=0;
-    string staff[Totstaff]={"Idham","Alif","Hadi","Najmi","Admin"};
-    int passStaff[Totstaff]={100,101,102,103,104};
+    string staff[5]={"Idham","Alif","Hadi","Najmi","Admin"};
+    int passStaff[5]={100,101,102,103,104};
     //Customer Details struct
     ReserveDetails CustRec;
     // for display reservation record
@@ -80,7 +80,7 @@ int main()
             cin>>username;
             cin>>pass1;
                 //for statement to check authentication off password and username
-                for(int i =0;i<Totstaff;i++){
+                for(int i =0;i<5;i++){
                     if(username == staff[i] && pass1 == passStaff[i]){
                         authentication = true;
                     }
@@ -139,17 +139,35 @@ int main()
                                     cin>>p.Class;
 
                                     AddTDToFile();
+                                    cout<<endl;
                                     goto startStaff;
                                 
 
                             break;
                         case 3:
-
-                           //edittrain();
-
+                        	system("CLS");
+                        	
+                            cout<<"--------EDIT TRAIN SCHEDULE--------"<<endl;
+                            cout<<"-----------------------------------"<<endl<<endl;
+                            
+                            DisplayTrip();
+                            cout<<endl;
+                            
+                            EditTrainD();
+                            cout<<endl;
+                            
+                            goto startStaff;
+                            
                             break;
                         case 4:
+                        	system("CLS");
+                        	
+                            cout<<"-------DELETE TRAIN SCHEDULE-------"<<endl;
+                            cout<<"-----------------------------------"<<endl<<endl;
+							DisplayTrip();
+							cout<<endl;                        	
                             DeleteTrainD();
+                            cout<<endl;
 						    goto startStaff;
                             
                             break;
@@ -181,14 +199,20 @@ int main()
         }
         else if(menu1 == 2){
             int menucust;
+            system("CLS");
         	startReserve:
+        	cout<<"-----------------------------------------------------------------------------------------------------------------------------------"<<endl;
+        	cout<<"-----------------------------------------------------------------------------------------------------------------------------------"<<endl;
             DisplayTrip();
             
             //menu in customer
-            cout<<"Welcome to train reservation system"<<endl;
+            cout<<"-----------------------------------------------------------------------------------------------------------------------------------"<<endl;
+            cout<<"-----------------------------------------------------------------------------------------------------------------------------------"<<endl;
+            cout<<endl;
+			cout<<"Welcome to train reservation system"<<endl;
             cout<<"[1]:Reservation"<<endl;
             cout<<"[2]:Enquiry"<<endl;
-            cout<<"[3]:TO EXIT"<<endl;
+            cout<<"[3]:To Exit"<<endl;
             cin>>menucust;
 
                 switch (menucust)
@@ -268,7 +292,7 @@ void DisplayCustomer(int& totcus)
 		}
 					
 			ReserveDetails DisplayReserve;
-         	ReserveRecord>>p.TrainCode>>DisplayReserve.CustName>>DisplayReserve.CustIC>>DisplayReserve.CustPhone>>DisplayReserve.CustEmail>>DisplayReserve.CustCategory>>DisplayReserve.Quantity>>DisplayReserve.TicketPrice;
+         	ReserveRecord>>DisplayReserve.TrainCode>>DisplayReserve.CustName>>DisplayReserve.CustIC>>DisplayReserve.CustPhone>>DisplayReserve.CustEmail>>DisplayReserve.CustCategory>>DisplayReserve.Quantity>>DisplayReserve.TicketPrice;
             while (!ReserveRecord.eof())
              {
                     count=count+1;
@@ -290,7 +314,7 @@ void DisplayCustomer(int& totcus)
 }
 
 
-
+//tq manab
 //function to calculate total price
  float getPrice(int total,char type,int TrainCode)
  {  float temprice;
@@ -339,7 +363,7 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
  	cout<<"QUANTITY: "<<quantity<<endl;
  	cout<<"TOTAL PRICE: "<<price<<endl;
  	
- 	cout<<"\n\nTHANK YOU!!";
+ 	cout<<"\n\nTHANK YOU!!"<<endl<<endl;
  	
  	//Saving Customer Reservation Record into file name ReserveRecord
 	ofstream IntoFile;
@@ -358,7 +382,7 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
  //function to input all data inputted by staff to a file system
  void AddTDToFile(){
     fstream inputdetail;
-    inputdetail.open("TrainDetails.txt", ios::app);
+    inputdetail.open("Traindetails.txt", ios::app);
     inputdetail<<p.TrainCode<<endl;
     inputdetail<<p.OriginStation<<endl;
     inputdetail<<p.DestinationStation<<endl;
@@ -459,7 +483,7 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
 			}
 		
 			    
-			cout<<"TrainCode\t Origin Station\t Destination Station\t Departure Time\t Estimate Time Arrival\t Price/Ticket\t Class"<<endl;
+			cout<<"\tTrainCode\t Origin Station\t Destination Station\t Departure Time\t Estimate Time Arrival\t Price/Ticket\t Class"<<endl;
 			    TrainSchedule>>p.TrainCode>>p.OriginStation>>p.DestinationStation>>p.DepartureTime>>p.EstTimeArrival>>p.PricePerTicket>>p.Class;
 			        while(!TrainSchedule.eof()) 
 			            {
@@ -470,4 +494,101 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
 			    TrainSchedule.close();
 		}
 
-  
+//function to edit train schedule
+void EditTrainD()
+{
+	//variable declaration
+	string trainFind, trainCode, trainOrigin, trainDestination, trainDepartTime, trainArriveTime, trainPrice, trainClass;
+	Traininfo ti;
+	
+	fstream in, inTemp;
+	
+	in.open("Traindetails.txt", ios::in);
+	inTemp.open("temp.txt", ios::app | ios::out);
+
+	//checking existence of file text
+	if(in.fail())
+	{
+		cout<<"\n\t\t\t file does not exist, please create first!!"<<endl;
+		cout<<"Press any key to continue"<<endl;
+		in.close();		
+	}
+	
+	else
+	{
+		//search by input train code
+		cout<<"Which train (TRAIN CODE) do you want to make changes?"<<endl;
+		cin>>trainFind;		
+	}
+	
+	//data from file text into variable
+	in>>trainCode;
+	in>>trainOrigin;
+	in>>trainDestination;
+	in>>trainDepartTime;
+	in>>trainArriveTime;
+	in>>trainPrice;
+	in>>trainClass;
+	
+
+	while(!in.eof())
+	{
+		if(trainFind!=trainCode)
+		{
+			inTemp<<trainCode<<endl;
+			inTemp<<trainOrigin<<endl;
+			inTemp<<trainDestination<<endl;
+			inTemp<<trainDepartTime<<endl;
+			inTemp<<trainArriveTime<<endl;
+			inTemp<<trainPrice<<endl;
+			inTemp<<trainClass<<endl<<endl;
+		}
+		
+		else
+		{
+			//user input new train data
+			cout<<"Please enter the new details for the schedule records"<<endl;
+			cout<<"-----------------------------------------------------"<<endl<<endl;
+			cout<<"Train Code: ";
+			cin>>trainCode;
+			cout<<"Origin Station: ";
+			cin>>trainOrigin;
+			cout<<"Destination Station: ";
+			cin>>trainDestination;
+			cout<<"Departure Time: ";
+			cin>>trainDepartTime;
+			cout<<"Estimated Time Arrival: ";
+			cin>>trainArriveTime;
+			cout<<"Price per Ticket: RM";
+			cin>>trainPrice;
+			cout<<"Train Class: ";
+			cin>>trainClass;
+			
+			//input the new train data into file text
+			inTemp<<trainCode<<endl;
+			inTemp<<trainOrigin<<endl;
+			inTemp<<trainDestination<<endl;
+			inTemp<<trainDepartTime<<endl;
+			inTemp<<trainArriveTime<<endl;
+			inTemp<<trainPrice<<endl;
+			inTemp<<trainClass<<endl<<endl;
+		}
+		
+		 //data file text into variable by line until end of file..
+		in>>trainCode;
+		in>>trainOrigin;
+		in>>trainDestination;
+		in>>trainDepartTime;
+		in>>trainArriveTime;
+		in>>trainPrice;
+		in>>trainClass;		
+	}
+	
+	cout<<"The changes have been saved SUCCESSFULLY";
+
+	in.close();
+	inTemp.close();
+	
+	remove("Traindetails.txt");
+	rename("temp.txt", "Traindetails.txt");
+}
