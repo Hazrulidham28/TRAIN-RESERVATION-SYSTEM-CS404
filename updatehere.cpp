@@ -362,28 +362,25 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
  void AddTDToFile(){
 
     cout<<"-------ADD TRAIN SCHEDULE----------"<<endl;
-                            cout<<"-----------------------------------"<<endl<<endl;
+    cout<<"-----------------------------------"<<endl<<endl;
                             
-                                //ask the staff to input the train details involved
-                                    cout<<"Please enter TRAIN CODE: "<<endl; 
-                                    cin>>p.TrainCode;
-                                    cout<<"Please enter the ORIGIN station: "<<endl;
-                                    getline(cin>>ws,p.OriginStation);
-                                    cout<<"Please enter the DESTINATION station: "<<endl;
-                                    getline(cin>>ws,p.DestinationStation);
+    //ask the staff to input the train details involved
+    cout<<"Please enter TRAIN CODE: "<<endl; 
+    cin>>p.TrainCode;
+    cout<<"Please enter the ORIGIN station: "<<endl;
+    getline(cin>>ws,p.OriginStation);
+    cout<<"Please enter the DESTINATION station: "<<endl;
+    getline(cin>>ws,p.DestinationStation);
+    cout<<"Please enter DEPARTURE time: "<<endl;
+    cin>>p.DepartureTime;
+    cout<<"Pleas enter ESTIMATED ARRIVAL time: "<<endl;
+    cin>>p.EstTimeArrival;
+    cout<<"Please enter PRICE per ticket: "<<endl;
+    cin>>p.PricePerTicket;
+    cout<<"Please enter CLASS ('B','P','G','S'): "<<endl;
+    cin>>p.Class;
 
-                                //need some time to research libraries for TIME yg suitable
-                                     cout<<"Please enter DEPARTURE time: "<<endl;
-                                     cin>>p.DepartureTime;
-                                     cout<<"Pleas enter ESTIMATED ARRIVAL time: "<<endl;
-                                     cin>>p.EstTimeArrival;
-                                //-------------------------------------------------------
-
-                                    cout<<"Please enter PRICE per ticket: "<<endl;
-                                    cin>>p.PricePerTicket;
-                                    cout<<"Please enter CLASS ('B','P','G','S'): "<<endl;
-                                    cin>>p.Class;
-
+    //input the data to the file trandetails.txt
     fstream inputdetail;
     inputdetail.open("Traindetails.txt", ios::app);
     inputdetail<<p.TrainCode<<endl;
