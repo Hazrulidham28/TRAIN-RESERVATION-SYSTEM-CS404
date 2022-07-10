@@ -115,29 +115,6 @@ int main()
                         case 2:
                             system("CLS");
                             
-                            cout<<"-------ADD TRAIN SCHEDULE----------"<<endl;
-                            cout<<"-----------------------------------"<<endl<<endl;
-                            
-                                //ask the staff to input the train details involved
-                                    cout<<"Please enter TRAIN CODE: "<<endl; 
-                                    cin>>p.TrainCode;
-                                    cout<<"Please enter the ORIGIN station: "<<endl;
-                                    getline(cin>>ws,p.OriginStation);
-                                    cout<<"Please enter the DESTINATION station: "<<endl;
-                                    getline(cin>>ws,p.DestinationStation);
-
-                                //need some time to research libraries for TIME yg suitable
-                                     cout<<"Please enter DEPARTURE time: "<<endl;
-                                     cin>>p.DepartureTime;
-                                     cout<<"Pleas enter ESTIMATED ARRIVAL time: "<<endl;
-                                     cin>>p.EstTimeArrival;
-                                //-------------------------------------------------------
-
-                                    cout<<"Please enter PRICE per ticket: "<<endl;
-                                    cin>>p.PricePerTicket;
-                                    cout<<"Please enter CLASS ('B','P','G','S'): "<<endl;
-                                    cin>>p.Class;
-
                                     AddTDToFile();
                                     cout<<endl;
                                     goto startStaff;
@@ -383,6 +360,30 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
 
  //function to input all data inputted by staff to a file system
  void AddTDToFile(){
+
+    cout<<"-------ADD TRAIN SCHEDULE----------"<<endl;
+                            cout<<"-----------------------------------"<<endl<<endl;
+                            
+                                //ask the staff to input the train details involved
+                                    cout<<"Please enter TRAIN CODE: "<<endl; 
+                                    cin>>p.TrainCode;
+                                    cout<<"Please enter the ORIGIN station: "<<endl;
+                                    getline(cin>>ws,p.OriginStation);
+                                    cout<<"Please enter the DESTINATION station: "<<endl;
+                                    getline(cin>>ws,p.DestinationStation);
+
+                                //need some time to research libraries for TIME yg suitable
+                                     cout<<"Please enter DEPARTURE time: "<<endl;
+                                     cin>>p.DepartureTime;
+                                     cout<<"Pleas enter ESTIMATED ARRIVAL time: "<<endl;
+                                     cin>>p.EstTimeArrival;
+                                //-------------------------------------------------------
+
+                                    cout<<"Please enter PRICE per ticket: "<<endl;
+                                    cin>>p.PricePerTicket;
+                                    cout<<"Please enter CLASS ('B','P','G','S'): "<<endl;
+                                    cin>>p.Class;
+
     fstream inputdetail;
     inputdetail.open("Traindetails.txt", ios::app);
     inputdetail<<p.TrainCode<<endl;
