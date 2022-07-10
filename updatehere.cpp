@@ -177,7 +177,7 @@ int main()
                         
                         	
                         default:
-                            
+                            cout<<"Wrong choice !!!"<<endl;
                             break;
                         }
 
@@ -270,6 +270,8 @@ int main()
                 	cout<<"THANK YOU FOR USING OUR SERVICE";
                 
                 default:
+
+                cout<<"Wrong choice"<<endl;
                     break;
                 }
 
