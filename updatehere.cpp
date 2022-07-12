@@ -31,7 +31,7 @@ struct Traininfo
     string DestinationStation;
     string DepartureTime;
     string EstTimeArrival;
-    int PricePerTicket;
+    double PricePerTicket;
     char Class;
 };
 struct Traininfo p;
@@ -106,17 +106,19 @@ int main()
                         {
                         case 1:
                         //void function statement to display customer
-                        //kena letak comment kat function bawah ni sebab tak declare,kalau tak nanti bila run dia error 
+                         system("CLS");
                             //Displaycustomer();
                              DisplayCustomer(Totcust);
                                 cout<<"The total of customer is "<<Totcust<<endl;
-							
+                                cout<<"--------------------------------------------------------------"<<endl<<endl;
+							goto startStaff;
                             break;
                         case 2:
                             system("CLS");
                             
                                     AddTDToFile();
                                     cout<<endl;
+                                    cout<<"--------------------------------------------------------------"<<endl<<endl;
                                     goto startStaff;
                                 
 
@@ -132,7 +134,7 @@ int main()
                             
                             EditTrainD();
                             cout<<endl;
-                            
+                            cout<<"--------------------------------------------------------------"<<endl<<endl;
                             goto startStaff;
                             
                             break;
@@ -145,16 +147,17 @@ int main()
 							cout<<endl;                        	
                             DeleteTrainD();
                             cout<<endl;
+                            cout<<"--------------------------------------------------------------"<<endl<<endl;
 						    goto startStaff;
                             
                             break;
                         case 5:
                         	    system("CLS");
-                        	    cout<<"THANK YOU!";
+                        	    cout<<"THANK YOU (^-^)";
                         
                         	
                         default:
-                            cout<<"Wrong choice !!!"<<endl;
+                            cout<<"WRONG CHOICE !!! (^_^)"<<endl;
                             break;
                         }
 
@@ -167,7 +170,7 @@ int main()
 
                 }
                 else{
-                    cout<<"WRONG USERNAME OR PASSWORD!! PLEASE TRY AGAIN!!"<<endl;
+                    cout<<"WRONG USERNAME OR PASSWORD!! PLEASE TRY AGAIN!! "<<endl;
                 }
 
             
@@ -237,8 +240,8 @@ int main()
             	cout<<"For any enqueiry, you can contact:-"<<endl;
             	cout<<"Mr Idham - 0173492387"<<endl;
             	cout<<"Mr Najmi - 0138572034"<<endl;
-            	cout<<"Mr Hard D - 013452074"<<endl;
-            	cout<<"Mr Alip Puey - 01545472034"<<endl;
+            	cout<<"Mr Hadi - 013452074"<<endl;
+            	cout<<"Mr Alif - 01545472034"<<endl;
             	cout<<"------------------------------------------------------"<<endl;
                     break;
                 
@@ -332,6 +335,7 @@ void DisplayCustomer(int& totcus)
  //function to display customer reservation details
 void RecReserve(int train, string name, int IC, int phone, string email, char category, int quantity, float& price)
  {
+ 	system("CLS");
  	cout<<"\n\nCUSTOMER RESERVATION RECORD"<<endl;
  	cout<<"TRAIN CODE: "<<train<<endl;
  	cout<<"NAME: "<<name<<endl;
@@ -487,7 +491,7 @@ void RecReserve(int train, string name, int IC, int phone, string email, char ca
 			    TrainSchedule>>p.TrainCode>>p.OriginStation>>p.DestinationStation>>p.DepartureTime>>p.EstTimeArrival>>p.PricePerTicket>>p.Class;
 			        while(!TrainSchedule.eof()) 
 			            {
-			            	cout<<"  "<<p.TrainCode<<"\t\t\t"<<p.OriginStation<<"\t\t"<<p.DestinationStation<<"\t\t\t"<<p.DepartureTime<<"\t\t"<<p.EstTimeArrival<<"\t\t    "<<p.PricePerTicket<<"	\t   "<<p.Class;
+			            	cout<<"\t  "<<p.TrainCode<<"\t\t\t"<<p.OriginStation<<"\t\t"<<p.DestinationStation<<"\t\t\t"<<p.DepartureTime<<"\t\t"<<p.EstTimeArrival<<"\t\t    "<<p.PricePerTicket<<"	   "<<p.Class;
 			                     cout<<endl;
 			             TrainSchedule>>p.TrainCode>>p.OriginStation>>p.DestinationStation>>p.DepartureTime>>p.EstTimeArrival>>p.PricePerTicket>>p.Class;
 			             }   
