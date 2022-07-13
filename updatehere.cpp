@@ -12,7 +12,7 @@ void DisplayCustomer(int &);
 
 float getPrice(int ,char ,int);
 
-void RecReserve(int , string , int , int , string , char , int , float&);
+void RecReserve(int , string , string , string , string , char , int , float&);
 
 void AddTDToFile();
 
@@ -42,8 +42,8 @@ struct ReserveDetails
 	int TrainCode;
     string CustName;
 	string CustEmail;
-    int CustIC; 
-	int CustPhone;
+    string CustIC; 
+	string CustPhone;
 	int Quantity;
     char CustCategory;
     float TicketPrice;
@@ -333,7 +333,7 @@ void DisplayCustomer(int& totcus)
  
  
  //function to display customer reservation details
-void RecReserve(int train, string name, int IC, int phone, string email, char category, int quantity, float& price)
+void RecReserve(int train, string name, string IC, string phone, string email, char category, int quantity, float& price)
  {
  	system("CLS");
  	cout<<"\n\nCUSTOMER RESERVATION RECORD"<<endl;
