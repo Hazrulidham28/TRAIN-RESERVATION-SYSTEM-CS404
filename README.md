@@ -1,4 +1,3 @@
-# TRAIN-RESERVATION-SYSTEM-CS404
-TRAIN RESERVATION SYSTEM SOURCE CODE
-ADA DUA JENIS,SATU MAIN SATU BRANCH
-MAIN UNTUK FINAL CODE, BRANCH UNTUK EDIT
+1. Train reservation system program built to help facilitate customers and train staff to manage the train reservation effectively. Nowadays, communities tend to use trains as their main transportation. Therefore, a well-organized system is required to further streamline the train management system. A lot of people and tourists either local or from overseas commonly choose the train as their daily transportation.
+
+2. The mission of the train company is to maintain the fluidity of the system especially in reservation for the customers. Thus, they always care of the customer’s feedback since their valuable review and opinions really help them to do improvement in every aspect. A very effective program may help the company to conduct the system easier. This program will be created using the C++ programming language by using dev C++ software.
